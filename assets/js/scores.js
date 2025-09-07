@@ -50,7 +50,7 @@ function badge(state, time){
   return `<span class="${cls}">${label}</span>`;
 }
 function teamBlock(t){ const score=(t.score===''||t.score==null)?'—':t.score; return `<div class="team"><div class="name">${t.name}</div><div class="rec">${t.record||''}</div><div class="score">${score}</div></div>`; }
-function card(g){ return `<article class="card" data-id="${g.id||''}"><div class="row"><div class="teams">${teamBlock(g.away)}<span class="at">@</span>${teamBlock(g.home)}</div><div class="actions">${badge(g.state,g.time)} ${g.id?`<button class="btn btn-box" data-id="${g.id}">Box</button>`:''}</div></div><div class="row small"><span>${g.date||''}</span><span class="muted">${g.source}</span></div></article>`; }
+function card(g){ const box=g.link?`<a class="btn" href="${g.link}" target="_blank" rel="noopener">Box</a>`:(g.id?`<button class="btn btn-box" data-id="${g.id}">Box</button>`:''); return `<article class="card" data-id="${g.id||''}"><div class="row"><div class="teams">${teamBlock(g.away)}<span class="at">@</span>${teamBlock(g.home)}</div><div class="actions">${badge(g.state,g.time)} ${box}</div></div><div class="row small"><span>${g.date||''}</span><span class="muted">${g.source}</span></div></article>`; }
 
 async function api(path){ const r = await fetch(path); if(!r.ok) throw new Error('API '+r.status); return r.json(); }
 async function load(iso){
