@@ -2,6 +2,7 @@
   "name": "MIAA Football",
   "short_name": "MIAA FB",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0b132b",
   "theme_color": "#0b132b",

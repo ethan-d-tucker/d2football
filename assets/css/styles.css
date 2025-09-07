@@ -1,4 +1,4 @@
-/* MIAA Football — mobile-first styles with quick-jump + highlight */
+/* MIAA Football v4 */
 :root{ --bg:#0b132b; --card:#111a3a; --muted:#9fb3c8; --text:#e6edf3; --accent:#5bc0be; --accent2:#8fd694; --shadow:0 10px 30px rgba(0,0,0,.25); }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;}
@@ -12,7 +12,7 @@ main{padding:1rem .8rem;max-width:1100px;margin:0 auto}
 .date-controls{display:flex;gap:.4rem;align-items:center}
 .date-controls button, .quick button{background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.45rem .6rem;cursor:pointer}
 .quick{display:flex;gap:.4rem;align-items:center}
-.search, .goto{background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.5rem .7rem;min-width:210px}
+.select, .goto{appearance:none;background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.5rem .7rem;min-width:210px}
 .summary{color:var(--muted);margin-bottom:.5rem}
 .cards{display:grid;grid-template-columns:1fr;gap:.7rem}
 .card{background:var(--card);border:1px solid #223160;border-radius:16px;padding:.8rem;box-shadow:var(--shadow)}
@@ -29,10 +29,5 @@ main{padding:1rem .8rem;max-width:1100px;margin:0 auto}
 .table th,.table td{border-bottom:1px solid #23305f;padding:.45rem .35rem;text-align:left}
 .table th{color:#b8c7e0;font-weight:700;background:#0f2047;position:sticky;top:0}
 tr.highlight{background:#0f255d !important;box-shadow:inset 0 0 0 2px #5bc0be}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#12214a;border:1px solid #30407a;color:#cfe2ff;padding:.6rem .9rem;border-radius:12px;display:none;box-shadow:var(--shadow)}
-.toast.show{display:block}
-.loader{width:100%;height:6px;background:#0d1a3b;border-radius:6px;overflow:hidden;margin:.6rem 0}
-.loader:after{content:"";display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--accent),var(--accent2));animation:load 1.2s infinite}
-@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
-@media (min-width:720px){.cards{grid-template-columns:1fr 1fr}} @media (min-width:1024px){.cards{grid-template-columns:1fr 1fr 1fr}}
 footer.app{padding:1rem .8rem;color:var(--muted);border-top:1px solid #202b55}
+@media (min-width:720px){.cards{grid-template-columns:1fr 1fr}} @media (min-width:1024px){.cards{grid-template-columns:1fr 1fr 1fr}}

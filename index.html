@@ -19,6 +19,7 @@
     <nav class="nav">
       <a href="index.html" class="active">Scores</a>
       <a href="standings.html">Standings</a>
+      <a href="rankings.html">Rankings</a>
     </nav>
   </header>
 
@@ -36,7 +37,12 @@
           <button id="btnNextSat" title="Jump to next Saturday">Next Sat</button>
         </div>
         <div class="right-controls">
-          <input id="teamFilter" class="search" placeholder="Filter by team…" />
+          <select id="teamSelect" class="select">
+            <option value="">All teams</option>
+            <option>Central Missouri</option><option>Central Oklahoma</option><option>Emporia State</option>
+            <option>Fort Hays State</option><option>Missouri Southern</option><option>Missouri Western</option>
+            <option>Nebraska-Kearney</option><option>Northwest Missouri State</option><option>Pittsburg State</option><option>Washburn</option>
+          </select>
         </div>
       </div>
       <div id="scoresMeta" class="summary"></div>
@@ -46,7 +52,7 @@
 
   <footer class="app"><div class="muted">Auto-refreshes every 60s on today's date.</div></footer>
 
-  <!-- Modal -->
+  <!-- Modal for Box Score -->
   <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none">
     <div class="modal-card" role="document">
       <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
@@ -54,7 +60,6 @@
       <div id="modalBody" class="modal-body"></div>
     </div>
   </div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/scores.js"></script>
 </body>
