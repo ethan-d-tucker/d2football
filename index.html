@@ -1,66 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MIAA Football — Scores</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <meta name="theme-color" content="#0b132b">
 </head>
 <body>
-  <header class="app">
-    <div class="brand">
-      <div class="logo">🏈</div>
+<header class="app">
+  <div class="brand"><div class="logo">🏈</div><div><h1>MIAA Football</h1><p class="sub">Scores</p></div></div>
+  <nav class="nav">
+    <a href="index.html" class="active">Scores</a>
+    <a href="standings.html">Standings</a>
+    <a href="rankings.html">Rankings</a>
+  </nav>
+</header>
+<main>
+  <section>
+    <div class="controls">
+      <div class="date-controls">
+        <button id="prevDay" aria-label="Previous day">◀</button>
+        <input id="datePicker" type="date" />
+        <button id="nextDay" aria-label="Next day">▶</button>
+      </div>
+      <div class="quick">
+        <button id="btnToday">Today</button>
+        <button id="btnLastSat">Last Sat</button>
+        <button id="btnNextSat">Next Sat</button>
+      </div>
       <div>
-        <h1>MIAA Football</h1>
-        <p class="sub">Scores</p>
+        <select id="teamSelect" class="select">
+          <option value="">All teams</option>
+          <option>Central Missouri</option><option>Central Oklahoma</option><option>Emporia State</option>
+          <option>Fort Hays State</option><option>Missouri Southern</option><option>Missouri Western</option>
+          <option>Nebraska-Kearney</option><option>Northwest Missouri State</option><option>Pittsburg State</option><option>Washburn</option>
+        </select>
       </div>
     </div>
-    <nav class="nav">
-      <a href="index.html" class="active">Scores</a>
-      <a href="standings.html">Standings</a>
-      <a href="rankings.html">Rankings</a>
-    </nav>
-  </header>
+    <div id="scoresMeta" class="summary"></div>
+    <div id="scoresList" class="cards"></div>
+  </section>
+</main>
+<footer class="app"><div class="muted">Auto-refreshes every 60s on today's date.</div></footer>
 
-  <main>
-    <section>
-      <div class="controls">
-        <div class="date-controls">
-          <button id="prevDay">◀</button>
-          <input id="datePicker" type="date" />
-          <button id="nextDay">▶</button>
-        </div>
-        <div class="quick">
-          <button id="btnToday" title="Jump to today">Today</button>
-          <button id="btnLastSat" title="Jump to last Saturday">Last Sat</button>
-          <button id="btnNextSat" title="Jump to next Saturday">Next Sat</button>
-        </div>
-        <div class="right-controls">
-          <select id="teamSelect" class="select">
-            <option value="">All teams</option>
-            <option>Central Missouri</option><option>Central Oklahoma</option><option>Emporia State</option>
-            <option>Fort Hays State</option><option>Missouri Southern</option><option>Missouri Western</option>
-            <option>Nebraska-Kearney</option><option>Northwest Missouri State</option><option>Pittsburg State</option><option>Washburn</option>
-          </select>
-        </div>
-      </div>
-      <div id="scoresMeta" class="summary"></div>
-      <div id="scoresList" class="cards"></div>
-    </section>
-  </main>
-
-  <footer class="app"><div class="muted">Auto-refreshes every 60s on today's date.</div></footer>
-
-  <!-- Modal for Box Score -->
-  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none">
-    <div class="modal-card" role="document">
-      <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
-      <div id="modalTitle" class="modal-title"></div>
-      <div id="modalBody" class="modal-body"></div>
-    </div>
+<div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" style="display:none">
+  <div class="modal-card" role="document">
+    <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
+    <div id="modalTitle" class="modal-title"></div>
+    <div id="modalBody" class="modal-body"></div>
   </div>
+</div>
 
-  <script src="assets/js/scores.js?v=9"></script>
-</body>
-</html>
+<script src="assets/js/scores.js?v=10"></script>
+</body></html>

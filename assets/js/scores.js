@@ -1,4 +1,4 @@
-/* Scores page with team dropdown + box scores */
+
 const els = {
   list: document.getElementById('scoresList'),
   meta: document.getElementById('scoresMeta'),
@@ -22,7 +22,7 @@ const ALIASES = [
   ["Missouri Southern","Mo. Southern","Missouri Southern St.","Missouri Southern State"],
   ["Missouri Western","Mo. Western","Missouri Western St.","Missouri Western State"],
   ["Fort Hays State","Fort Hays","FHSU"],
-  ["Central Oklahoma","UCO"],
+  ["Central Oklahoma","UCO","Central Okla."],
   ["Pittsburg State","Pitt State","Pittsburg St."],
   ["Emporia State","Emporia St."],
   ["Central Missouri","Central Mo.","Central Missouri St."],
@@ -50,24 +50,48 @@ function badge(state, time){
   return `<span class="${cls}">${label}</span>`;
 }
 function teamBlock(t){ const score=(t.score===''||t.score==null)?'—':t.score; return `<div class="team"><div class="name">${t.name}</div><div class="rec">${t.record||''}</div><div class="score">${score}</div></div>`; }
-function card(g){ const box=g.link?`<a class="btn" href="${g.link}" target="_blank" rel="noopener">Box</a>`:(g.id?`<button class="btn btn-box" data-id="${g.id}">Box</button>`:''); return `<article class="card" data-id="${g.id||''}"><div class="row"><div class="teams">${teamBlock(g.away)}<span class="at">@</span>${teamBlock(g.home)}</div><div class="actions">${badge(g.state,g.time)} ${box}</div></div><div class="row small"><span>${g.date||''}</span><span class="muted">${g.source}</span></div></article>`; }
+function card(g){ const box=g.link?`<a class="btn" href="${g.link}" target="_blank" rel="noopener">Box</a>`:(g.id?`<button class="btn btn-box" data-id="${g.id}">Box</button>`:''); return `<article class="card" data-id="${g.id||''}"><div class="row"><div class="teams">${teamBlock(g.away)}<span class="at">@</span>${teamBlock(g.home)}</div><div class="actions">${badge(g.state,g.time)} ${box}</div></div></article>`; }
 
 async function api(path){ const r = await fetch(path); if(!r.ok) throw new Error('API '+r.status); return r.json(); }
-async function load(iso){
-  els.list.innerHTML = `<div class="card"><div class="loader"></div> Loading…</div>`;
-  try{
-    const data = await api(`/api/miaa/scoreboard?date=${iso}`);
-    let games = data.games||[];
-    const t = els.team.value.trim();
-    if(t){ games = games.filter(g => g.home.name===t || g.away.name===t); }
-    els.meta.textContent = `${games.length} game${games.length===1?'':'s'} • ${iso} • Last updated ${new Date().toLocaleTimeString()}`;
-    els.list.innerHTML = games.map(card).join('') || `<div class="card">No games found.</div>`;
-    document.querySelectorAll('.btn-box').forEach(b => b.addEventListener('click', ()=> openBox(b.dataset.id)));
-  }catch(e){
-    els.list.innerHTML = `<div class="card">Could not load games for this date.</div>`;
-    els.meta.textContent = `0 games • ${iso} • Last updated ${new Date().toLocaleTimeString()}`;
-  }
+
+async function fetchGames(iso){
+  try { const data = await api(`/api/miaa/scoreboard?date=${iso}`); return data.games||[]; }
+  catch(e){ return []; }
 }
+
+function renderGames(iso, games, note=''){
+  const t = els.team.value.trim();
+  if(t){ games = games.filter(g => g.home.name===t || g.away.name===t); }
+  els.meta.textContent = `${games.length} game${games.length===1?'':'s'} • ${iso}` + (note?` • ${note}`:'') + ` • Last updated ${new Date().toLocaleTimeString()}`;
+  els.list.innerHTML = games.map(card).join('') || `<div class="card">No games found.</div>`;
+  document.querySelectorAll('.btn-box').forEach(b => b.addEventListener('click', ()=> openBox(b.dataset.id)));
+}
+
+async function loadNearest(iso, preferDir=0){
+  // Try requested date first
+  let games = await fetchGames(iso);
+  if(games.length){ renderGames(iso, games); return; }
+  // Search up to ±14 days, preferring direction if provided
+  for(let step=1; step<=14; step++){
+    const dirs = preferDir === 0 ? [-1, 1] : [preferDir];
+    for(const d of dirs){
+      const candidate = fmtDateISO(addDays(new Date(iso), d*step));
+      games = await fetchGames(candidate);
+      if(games.length){
+        setDateISO(candidate);
+        renderGames(candidate, games, `No games on ${iso}. Jumped to ${candidate}.`);
+        return;
+      }
+    }
+  }
+  renderGames(iso, []);
+}
+
+async function load(iso, preferDir=0){
+  els.list.innerHTML = `<div class="card"><div class="loader"></div> Loading…</div>`;
+  await loadNearest(iso, preferDir);
+}
+
 async function openBox(id){
   try{
     const data = await api(`/api/miaa/boxscore?id=${encodeURIComponent(id)}`);
@@ -89,19 +113,21 @@ async function openBox(id){
     openModal('Box Score', `<div class="card">Unable to load box score.</div>`);
   }
 }
+
 function openModal(title, html){ document.getElementById('modalTitle').textContent = title; document.getElementById('modalBody').innerHTML = html; els.modal.style.display='flex'; }
 function closeModal(){ els.modal.style.display='none'; }
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') closeModal(); });
 
 function setDateISO(iso){ els.date.value=iso; }
-function moveDay(delta){ setDateISO(fmtDateISO(addDays(new Date(els.date.value), delta))); load(els.date.value); }
+function moveDay(delta){ const target = fmtDateISO(addDays(new Date(els.date.value), delta)); setDateISO(target); load(target, delta<0?-1:1); }
+
 els.prev.addEventListener('click', ()=>moveDay(-1));
 els.next.addEventListener('click', ()=>moveDay(+1));
-els.date.addEventListener('change', ()=>load(els.date.value));
-els.btnToday.addEventListener('click', ()=>{ const iso=todayLocalISO(); setDateISO(iso); load(iso); });
-els.btnLastSat.addEventListener('click', ()=>{ const iso=fmtDateISO(lastSaturday()); setDateISO(iso); load(iso); });
-els.btnNextSat.addEventListener('click', ()=>{ const iso=fmtDateISO(nextSaturday()); setDateISO(iso); load(iso); });
+els.date.addEventListener('change', ()=>load(els.date.value, 0));
+els.btnToday.addEventListener('click', ()=>{ const iso=todayLocalISO(); setDateISO(iso); load(iso, 0); });
+els.btnLastSat.addEventListener('click', ()=>{ const iso=fmtDateISO(lastSaturday()); setDateISO(iso); load(iso, -1); });
+els.btnNextSat.addEventListener('click', ()=>{ const iso=fmtDateISO(nextSaturday()); setDateISO(iso); load(iso, +1); });
 els.team.addEventListener('change', ()=> load(els.date.value));
 
 (function init(){ const iso=todayLocalISO(); setDateISO(iso); load(iso); setInterval(()=>{ if(isToday(els.date.value)) load(els.date.value); }, 60000); })();

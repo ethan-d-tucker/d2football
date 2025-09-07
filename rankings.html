@@ -1,39 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>D2 Football — Top 25</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-  <header class="app">
-    <div class="brand">
-      <div class="logo">🏈</div>
-      <div>
-        <h1>D2 Football</h1>
-        <p class="sub">Top 25 Rankings</p>
-      </div>
+<header class="app">
+  <div class="brand"><div class="logo">🏈</div><div><h1>D2 Football</h1><p class="sub">Top 25 Rankings</p></div></div>
+  <nav class="nav">
+    <a href="index.html">Scores</a>
+    <a href="standings.html">Standings</a>
+    <a href="rankings.html" class="active">Rankings</a>
+  </nav>
+</header>
+<main>
+  <section>
+    <div class="card">
+      <table class="table" id="rankTable">
+        <thead><tr><th>#</th><th>Team</th><th>Record</th><th>Notes</th></tr></thead>
+        <tbody></tbody>
+      </table>
     </div>
-    <nav class="nav">
-      <a href="index.html">Scores</a>
-      <a href="standings.html">Standings</a>
-      <a href="rankings.html" class="active">Rankings</a>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <div class="card">
-        <table class="table" id="rankTable">
-          <thead><tr><th>#</th><th>Team</th><th>Record</th><th>Notes</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div id="rankMeta" class="summary"></div>
-    </section>
-  </main>
-  <footer class="app"><div class="muted">Source: D2Football.com</div></footer>
-  <script src="assets/js/rankings.js?v=9"></script>
-</body>
-</html>
+    <div id="rankMeta" class="summary"></div>
+  </section>
+</main>
+<script src="assets/js/rankings.js?v=10"></script>
+</body></html>

@@ -1,53 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MIAA Football — Standings</title>
   <link rel="stylesheet" href="assets/css/styles.css">
-  <meta name="theme-color" content="#0b132b">
 </head>
 <body>
-  <header class="app">
-    <div class="brand">
-      <div class="logo">🏈</div>
-      <div>
-        <h1>MIAA Football</h1>
-        <p class="sub">Standings</p>
+<header class="app">
+  <div class="brand"><div class="logo">🏈</div><div><h1>MIAA Football</h1><p class="sub">Standings</p></div></div>
+  <nav class="nav">
+    <a href="index.html">Scores</a>
+    <a href="standings.html" class="active">Standings</a>
+    <a href="rankings.html">Rankings</a>
+  </nav>
+</header>
+<main>
+  <section>
+    <div class="controls">
+      <div class="quick">
+        <select id="gotoTeam" class="select">
+          <option value="">Go to team…</option>
+          <option>Central Missouri</option><option>Central Oklahoma</option><option>Emporia State</option>
+          <option>Fort Hays State</option><option>Missouri Southern</option><option>Missouri Western</option>
+          <option>Nebraska-Kearney</option><option>Northwest Missouri State</option><option>Pittsburg State</option><option>Washburn</option>
+        </select>
+        <button id="btnGo">Go</button>
       </div>
     </div>
-    <nav class="nav">
-      <a href="index.html">Scores</a>
-      <a href="standings.html" class="active">Standings</a>
-      <a href="rankings.html">Rankings</a>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <div class="controls">
-        <div class="quick">
-          <select id="gotoTeam" class="select">
-            <option value="">Go to team…</option>
-            <option>Central Missouri</option><option>Central Oklahoma</option><option>Emporia State</option>
-            <option>Fort Hays State</option><option>Missouri Southern</option><option>Missouri Western</option>
-            <option>Nebraska-Kearney</option><option>Northwest Missouri State</option><option>Pittsburg State</option><option>Washburn</option>
-          </select>
-          <button id="btnGo">Go</button>
-        </div>
-      </div>
-      <div id="standingsMeta" class="summary"></div>
-      <div class="card">
-        <table class="table" id="standTable">
-          <thead><tr><th>Team</th><th>MIAA</th><th>Overall</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <footer class="app"><div class="muted">Conference-only standings with computed fallback.</div></footer>
-
-  <script src="assets/js/standings.js?v=9"></script>
-</body>
-</html>
+    <div id="standingsMeta" class="summary"></div>
+    <div class="card">
+      <table class="table" id="standTable">
+        <thead><tr><th>Team</th><th>MIAA</th><th>Overall</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<script src="assets/js/standings.js?v=10"></script>
+</body></html>

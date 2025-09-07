@@ -1,4 +1,4 @@
-/* Rankings page fetched server-side from D2Football */
+
 const T = { body: document.querySelector('#rankTable tbody'), meta: document.getElementById('rankMeta') };
 async function api(p){ const r = await fetch(p); if(!r.ok) throw new Error('API '+r.status); return r.json(); }
 async function load(){

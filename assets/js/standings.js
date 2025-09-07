@@ -1,4 +1,4 @@
-/* Standings page with dropdown Go-to */
+
 const S = {
   body: document.querySelector('#standTable tbody'),
   meta: document.getElementById('standingsMeta'),

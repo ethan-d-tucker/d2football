@@ -1,8 +1,7 @@
-/* MIAA Football v4 */
-:root{ --bg:#0b132b; --card:#111a3a; --muted:#9fb3c8; --text:#e6edf3; --accent:#5bc0be; --accent2:#8fd694; --shadow:0 10px 30px rgba(0,0,0,.25); }
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;}
-a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+
+:root{--bg:#0b132b;--card:#111a3a;--muted:#9fb3c8;--text:#e6edf3;--accent:#5bc0be;--shadow:0 10px 30px rgba(0,0,0,.25)}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 header.app{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0b132b,#0e1840);box-shadow:var(--shadow);padding:.7rem .9rem}
 .brand{display:flex;gap:.7rem;align-items:center}.logo{font-size:1.6rem}.sub{color:var(--muted);font-size:.85rem;margin-top:.1rem}
 .nav{margin-top:.6rem;display:flex;gap:.6rem}.nav a{background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:12px;padding:.5rem .8rem}
@@ -10,10 +9,10 @@ header.app{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0b
 main{padding:1rem .8rem;max-width:1100px;margin:0 auto}
 .controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;margin-bottom:.8rem}
 .date-controls{display:flex;gap:.4rem;align-items:center}
-.date-controls button, .quick button{background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.45rem .6rem;cursor:pointer}
+.date-controls button,.quick button{background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.45rem .6rem;cursor:pointer}
 .quick{display:flex;gap:.4rem;align-items:center}
-.select, .goto{appearance:none;background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.5rem .7rem;min-width:210px}
-.summary{color:var(--muted);margin-bottom:.5rem}
+.select{appearance:none;background:#162039;border:1px solid #2a355e;color:var(--text);border-radius:10px;padding:.5rem .7rem;min-width:210px}
+.summary{color:var(--muted);margin:.4rem 0 .6rem}
 .cards{display:grid;grid-template-columns:1fr;gap:.7rem}
 .card{background:var(--card);border:1px solid #223160;border-radius:16px;padding:.8rem;box-shadow:var(--shadow)}
 .card .row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
@@ -30,10 +29,8 @@ main{padding:1rem .8rem;max-width:1100px;margin:0 auto}
 .table th{color:#b8c7e0;font-weight:700;background:#0f2047;position:sticky;top:0}
 tr.highlight{background:#0f255d !important;box-shadow:inset 0 0 0 2px #5bc0be}
 footer.app{padding:1rem .8rem;color:var(--muted);border-top:1px solid #202b55}
-@media (min-width:720px){.cards{grid-template-columns:1fr 1fr}} @media (min-width:1024px){.cards{grid-template-columns:1fr 1fr 1fr}}
-
-
-/* Modal overlay */
+@media (min-width:720px){.cards{grid-template-columns:1fr 1fr}}@media (min-width:1024px){.cards{grid-template-columns:1fr 1fr 1fr}}
+/* Modal */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:1rem}
 .modal-card{background:#0f1a3b;border:1px solid #2a3a74;border-radius:16px;max-width:900px;width:100%;max-height:85vh;overflow:auto;box-shadow:0 10px 40px rgba(0,0,0,.5);padding:1rem}
 .modal-title{font-weight:800;margin-bottom:.6rem}
