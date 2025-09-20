@@ -56,9 +56,9 @@ export async function onRequest(context) {
       const blocks = html.split('<div class="scorebox"').slice(1).map(b=>'<div class="scorebox"'+b);
       if(!blocks.length) return [];
       const games = blocks.map(b=>{
-        const tds = [...b.matchAll(/<span class="team-name">\s*([^<]+)\s*</span>/gi)].map(m=>m[1].trim());
-        const scores = [...b.matchAll(/<span class="score">\s*(\\d+)\s*</span>/gi)].map(m=>+m[1]);
-        const status = (b.match(/<div class="status">\s*([^<]+)\s*</div>/i)||[])[1] || '';
+        const tds = [...b.matchAll(/<span class="team-name">\s*([^<]+)\s*<\/span>/gi)].map(m=>m[1].trim());
+        const scores = [...b.matchAll(/<span class="score">\s*(\d+)\s*<\/span>/gi)].map(m=>+m[1]);
+        const status = (b.match(/<div class="status">\s*([^<]+)\s*<\/div>/i)||[])[1] || '';
         if(tds.length>=2){
           const [away, home] = tds; const [as, hs] = scores.length>=2? scores : ['',''];
           const hB=belongs(home), aB=belongs(away); if(!hB && !aB) return null;

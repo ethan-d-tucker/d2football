@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MIAA Football — Scores</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="assets/css/styles.css">
   <meta name="theme-color" content="#0b132b">
 </head>
@@ -52,5 +53,6 @@
   </div>
 </div>
 
-<script src="assets/js/scores.js?v=10"></script>
+<script src="assets/js/scores.js?v=13"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});});}</script>
 </body></html>

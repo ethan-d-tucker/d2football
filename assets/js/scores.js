@@ -68,10 +68,8 @@ function renderGames(iso, games, note=''){
 }
 
 async function loadNearest(iso, preferDir=0){
-  // Try requested date first
   let games = await fetchGames(iso);
   if(games.length){ renderGames(iso, games); return; }
-  // Search up to ±14 days, preferring direction if provided
   for(let step=1; step<=14; step++){
     const dirs = preferDir === 0 ? [-1, 1] : [preferDir];
     for(const d of dirs){

@@ -33,7 +33,6 @@ export async function onRequest(context) {
     }
     throw new Error("no rows");
   }catch(e){
-    // fallback to computed standings if parse fails
     try{
       const year = new Date().getFullYear();
       const stat = {}; TEAMS.forEach(t=> stat[t] = {team:t, conf_w:0, conf_l:0, ovr_w:0, ovr_l:0});

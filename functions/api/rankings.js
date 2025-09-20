@@ -4,7 +4,6 @@ export async function onRequest(context) {
   });
   async function getText(u){ const r = await fetch(u, {cf:{cacheTtl:1800}}); if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); }
 
-  // D2Football Top 25
   try{
     const html = await getText('https://www.d2football.com/top25/');
     const ranks = [];
@@ -33,10 +32,9 @@ export async function onRequest(context) {
     if(ranks.length) return resp({source:'d2football', ranks});
   }catch(e){}
 
-  // AFCA fallback
   try{
     const html = await getText('https://afca.com/polls/');
-    const section = (html.match(/NCAA Division II[\s\S]*?<table[\s\S]*?<\/table>/i) || [])[0];
+    const section = (html.match(/NCAA Division II[\s\S]*?<\/table>/i) || [])[0];
     const ranks = [];
     if(section){
       const table = section.match(/<table[\s\S]*?<\/table>/i)[0];
